@@ -1,0 +1,11 @@
+select distinct C.customer_id, C.first_name, C.last_name, E.city, F.country, SUM(amount)
+from payment A
+right join rental B on A.customer_id = B.customer_id
+right join customer C ON B.customer_id = C.customer_id
+right join address D ON C.address_id = D.address_id
+right join city E ON D.city_id = E.city_id
+right join country F on E.country_id = F.country_id
+where amount <> 0
+GROUP BY C.customer_id, f.country, E.city, A.amount, C.first_name, C.last_name
+order by SUM(amount) desc
+limit 10
