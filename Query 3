@@ -1,0 +1,9 @@
+SELECT SUM(customer_id) as total_customers, D.country, C.city
+from customer A
+inner join address B ON A.address_id = B.address_id
+inner join city C ON B.city_id = C.city_id
+inner join country D ON C.country_id = D.country_id
+where country =  'Indonesia'
+group by country, city
+order by sum(customer_id) desc
+limit 10
